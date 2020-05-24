@@ -41,3 +41,18 @@
   font-size: 30px;
   margin-left: 10px;
 }
+#image-gallery{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+#image-gallery img{
+  width: 190px;
+  height: 190px;
+  margin: 10px;
+  transition: 1s;
+}
+#image-gallery img:hover{
+  filter: brightness(1.5);
+  transform: scale(1.1);
+}
