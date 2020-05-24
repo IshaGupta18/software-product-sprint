@@ -2,6 +2,7 @@
   margin-left: auto;
   margin-right: auto;
   width: 650px;
+  height: auto;
 }
 
 #greeting-container {
@@ -10,4 +11,21 @@
 #about-me{
   display: flex;
   flex-direction: column;
+}
+#my-projects{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+#my-projects-parent{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.project-card{
+  height: 310px;
+  width: 200px;
+  border: 2px solid black;
+  margin: 20px;
+  
 }
