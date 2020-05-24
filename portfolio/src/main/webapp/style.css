@@ -17,6 +17,11 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+#my-projects-parent{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
 .project-card{
   height: 310px;
   width: 200px;
