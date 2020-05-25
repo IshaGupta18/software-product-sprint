@@ -53,6 +53,8 @@ public class ChartServlet extends HttpServlet{
 
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-
+    response.setContentType("application/json");
+    String json = new Gson().toJson(chartData);
+    response.getWriter().println(json);
   }
 }
