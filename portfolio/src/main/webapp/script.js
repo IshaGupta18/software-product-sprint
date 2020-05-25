@@ -15,6 +15,8 @@
 /**
  * Adds a random greeting to the page.
  */
+google.charts.load('current', {'packages':['timeline']});
+
 function addRandomGreeting() {
   const greetings =
       ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
