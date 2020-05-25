@@ -27,7 +27,7 @@ function addRandomGreeting() {
   greetingContainer.innerText = greeting;
 }
 function fetchComments(){
-  fetch('/data').then(response => response.text()).then((comment)=>{
-    document.getElementById("comments-container").innerText=comment;
+  fetch('/data').then(response => response.text()).then((comments)=>{
+    console.log(comments);
   });
 }
