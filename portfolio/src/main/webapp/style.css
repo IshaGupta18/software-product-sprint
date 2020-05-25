@@ -1,4 +1,4 @@
-#content {
+.content {
   margin-left: auto;
   margin-right: auto;
   width: 650px;
@@ -59,4 +59,13 @@
 #photography-me{
   display: flex;
   flex-direction: column;
+}
+.navbar-list{
+  list-style-type: none;
+  display: flex;
+  justify-content: space-around;
+}
+.navbar-list li{
+  color: rgb(105, 102, 102);
+  text-decoration: none;
 }
