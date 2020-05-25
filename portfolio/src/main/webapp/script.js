@@ -47,9 +47,12 @@ function addDataColumns(dataTable){
   dataTable.addColumn({ type: 'date', id: 'Start' });
   dataTable.addColumn({ type: 'date', id: 'End' });
 }
+function getDate(date){
+  let dateList = date.split("-");
+  return new Date(dateList[0],dateList[1],dateList[2]);
+}
 function drawChart(){
   fetch('/timeline').then(response => response.json()).then((timelineData) =>{
-    console.log(timelineData);
     const dataTable = new google.visualization.DataTable();
     addDataColumns(dataTable);
   });
