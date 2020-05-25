@@ -24,6 +24,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  /**
+   *
+   */
+  private static final long serialVersionUID = 5770012060147035495L;
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
