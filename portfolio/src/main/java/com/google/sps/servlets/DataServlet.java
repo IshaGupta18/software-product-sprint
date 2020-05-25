@@ -13,6 +13,7 @@
 // limitations under the License.
 
 package com.google.sps.servlets;
+
 import com.google.gson.Gson;
 
 import java.io.IOException;
@@ -27,6 +28,7 @@ import com.google.appengine.api.datastore.DatastoreService;
 import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
+import com.google.appengine.api.datastore.Query;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -44,6 +46,13 @@ public class DataServlet extends HttpServlet {
     Comments.add("Ut tristique et egestas quis ipsum. Et sollicitudin ac orci phasellus.");
     Comments.add("Accumsan in nisl nisi scelerisque. Eget magna fermentum iaculis eu non diam phasellus.");
     Comments.add("Augue ut lectus arcu bibendum at varius vel.");
+  }
+
+  public PreparedQuery getStoredComments(){
+    Query query = new Query("Comment");
+    DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+    PreparedQuery results = datastore.prepare(query);
+    return results;
   }
 
   @Override
