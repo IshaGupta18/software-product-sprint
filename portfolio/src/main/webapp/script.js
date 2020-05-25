@@ -26,8 +26,16 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+function returnParagraphTag(content){
+  let pElement = document.createElement("P");
+  pElement.innerText = content;
+  return pElement;
+}
 function fetchComments(){
-  fetch('/data').then(response => response.text()).then((comments)=>{
+  fetch('/data').then(response => response.json()).then((comments)=>{
     console.log(comments);
+    comments.forEach((comment) => {
+      document.getElementById("comments-container").appendChild(returnParagraphTag(comment));
+    });
   });
 }
