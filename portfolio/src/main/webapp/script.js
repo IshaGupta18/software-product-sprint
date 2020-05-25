@@ -28,6 +28,6 @@ function addRandomGreeting() {
 }
 function fetchComments(){
   fetch('/data').then(response => response.text()).then((comment)=>{
-    console.log(comment);
+    document.getElementById("comments-container").innerText=comment;
   });
 }
