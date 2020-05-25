@@ -100,6 +100,14 @@
         </p>
       </div>
       <div id="comments">
+        <div id="comment-form">
+          <form action="/data" method="POST">
+            <h3>Please give your valuable suggestions and feedback...</h3>
+            <textarea name="comment-content" placeholder="Any suggestion or comment..."></textarea>
+            <br>
+            <input type="submit"/>
+          </form>
+        </div>
         <h2> Some words about me from the world... </h2>
         <button id="view-comments" onclick="fetchComments()">View Comments</button>
         <div id="comments-container"></div> 
