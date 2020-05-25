@@ -24,9 +24,14 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  /**
+   *
+   */
+  private static final long serialVersionUID = 5770012060147035495L;
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello Isha!</h1>");
+    response.getWriter().println("Hey Everyone, I have been summoned!");
   }
 }
