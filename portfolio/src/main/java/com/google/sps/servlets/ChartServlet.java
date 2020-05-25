@@ -18,6 +18,7 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Scanner;
 
 import javax.servlet.annotation.WebServlet;
@@ -25,18 +26,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.appengine.api.datastore.DatastoreService;
-import com.google.appengine.api.datastore.DatastoreServiceFactory;
-import com.google.appengine.api.datastore.Entity;
-import com.google.appengine.api.datastore.PreparedQuery;
-import com.google.appengine.api.datastore.Query;
-
 @WebServlet("/timeline")
 public class ChartServlet extends HttpServlet{
 
+  private LinkedHashMap<String,ArrayList<String>> chartData = new LinkedHashMap<String,ArrayList<String>>();
+
   @Override
   public void init(){
+    Scanner scanner = new Scanner(getServletContext().getResourceAsStream("/WEB-INF/timelineCharts.csv"));
+    while (scanner.hasNextLine()){
+      String line = scanner.nextLine();
+      String[] cells = line.split(",");
 
+      String position = cells[0];
+      ArrayList<String> values = new ArrayList<String>();
+      values.add(cells[1]);
+      values.add(cells[2]);
+      values.add(cells[3]);
+
+      chartData.put(position,values);
+
+    }
+    scanner.close();
 
   }
 
