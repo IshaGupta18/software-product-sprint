@@ -38,21 +38,22 @@ public class DataServlet extends HttpServlet {
    *
    */
   private static final long serialVersionUID = 5770012060147035495L;
-  private ArrayList<String> comments = new ArrayList<String>();
-
-  public void populateCommentsDefault(ArrayList<String> Comments) {
-    Comments.add("Quam lacus suspendisse faucibus.");
-    Comments.add("Vitae et leo duis ut diam quam nulla porttitor.");
-    Comments.add("Ut tristique et egestas quis ipsum. Et sollicitudin ac orci phasellus.");
-    Comments.add("Accumsan in nisl nisi scelerisque. Eget magna fermentum iaculis eu non diam phasellus.");
-    Comments.add("Augue ut lectus arcu bibendum at varius vel.");
-  }
 
   public PreparedQuery getStoredComments(){
     Query query = new Query("Comment");
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
     return results;
+  }
+
+  public ArrayList<String> convertDataToList(){
+    ArrayList<String> commentsList = new ArrayList<String>();
+    PreparedQuery commentsDatastore = getStoredComments();
+    for (Entity entity : commentsDatastore.asIterable()){
+      String comment = (String) entity.getProperty("content");
+      commentsList.add(comment);
+    }
+    return commentsList;
   }
 
   @Override
