@@ -29,7 +29,11 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/timeline")
 public class ChartServlet extends HttpServlet{
 
-  private LinkedHashMap<String,ArrayList<String>> chartData = new LinkedHashMap<String,ArrayList<String>>();
+  /**
+   *
+   */
+  private static final long serialVersionUID = -5442805240413839253L;
+  private LinkedHashMap<String, ArrayList<String>> chartData = new LinkedHashMap<String, ArrayList<String>>();
 
   @Override
   public void init(){
