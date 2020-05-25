@@ -13,8 +13,11 @@
 // limitations under the License.
 
 package com.google.sps.servlets;
+import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +32,20 @@ public class DataServlet extends HttpServlet {
    */
   private static final long serialVersionUID = 5770012060147035495L;
 
+  public void populateCommentsDefault(ArrayList<String> Comments) {
+    Comments.add("Quam lacus suspendisse faucibus.");
+    Comments.add("Vitae et leo duis ut diam quam nulla porttitor.");
+    Comments.add("Ut tristique et egestas quis ipsum. Et sollicitudin ac orci phasellus.");
+    Comments.add("Accumsan in nisl nisi scelerisque. Eget magna fermentum iaculis eu non diam phasellus.");
+    Comments.add("Augue ut lectus arcu bibendum at varius vel.");
+  }
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
-    response.getWriter().println("Hey Everyone, I have been summoned!");
+    ArrayList<String> comments = new ArrayList<String>();
+    populateCommentsDefault(comments);
+    String jsonArray = new Gson().toJson(comments);
+    response.getWriter().println(jsonArray);
   }
 }
