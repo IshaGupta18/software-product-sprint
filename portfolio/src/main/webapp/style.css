@@ -4,13 +4,8 @@
   width: 650px;
   height: auto;
 }
-
 #greeting-container {
   margin-top: 20px;
-}
-#about-me{
-  display: flex;
-  flex-direction: column;
 }
 #my-projects{
   display: flex;
@@ -27,7 +22,6 @@
   width: 200px;
   border: 2px solid black;
   margin: 20px;
-  
 }
 #contact-information{
   bottom: 0;
@@ -56,16 +50,8 @@
   filter: brightness(1.5);
   transform: scale(1.1);
 }
-#photography-me{
-  display: flex;
-  flex-direction: column;
-}
 .navbar-list{
   list-style-type: none;
   display: flex;
   justify-content: space-around;
-}
-.navbar-list li{
-  color: rgb(105, 102, 102);
-  text-decoration: none;
 }
