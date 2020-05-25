@@ -63,5 +63,16 @@ function drawChart(){
   fetch('/timeline').then(response => response.json()).then((timelineData) =>{
     const dataTable = new google.visualization.DataTable();
     addDataColumns(dataTable);
+    let data = [];
+    Object.keys(timelineData).forEach(function(key){
+      data.push(getDataRow(timelineData,key));
+    });
+    dataTable.addRows(data);
+    var options = {
+      timeline: { colorByRowLabel: true }
+    };
+    var container = document.getElementById("timeline-chart-container");
+    var chart = new google.visualization.Timeline(container);
+    chart.draw(dataTable,options);
   });
 }
