@@ -31,6 +31,7 @@ public class DataServlet extends HttpServlet {
    *
    */
   private static final long serialVersionUID = 5770012060147035495L;
+  private ArrayList<String> comments = new ArrayList<String>();
 
   public void populateCommentsDefault(ArrayList<String> Comments) {
     Comments.add("Quam lacus suspendisse faucibus.");
@@ -43,9 +44,14 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("text/html;");
-    ArrayList<String> comments = new ArrayList<String>();
-    populateCommentsDefault(comments);
     String jsonArray = new Gson().toJson(comments);
     response.getWriter().println(jsonArray);
+  }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    String comment = request.getParameter("comment-content");
+    comments.add(comment);
+    response.sendRedirect("/index.html");
   }
 }
