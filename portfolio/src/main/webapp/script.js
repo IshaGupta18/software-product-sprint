@@ -41,3 +41,16 @@ function fetchComments(){
     });
   });
 }
+function addDataColumns(dataTable){
+  dataTable.addColumn({ type: 'string', id: 'Organization' });
+  dataTable.addColumn({ type: 'string', id: 'Position' });
+  dataTable.addColumn({ type: 'date', id: 'Start' });
+  dataTable.addColumn({ type: 'date', id: 'End' });
+}
+function drawChart(){
+  fetch('/timeline').then(response => response.json()).then((timelineData) =>{
+    console.log(timelineData);
+    const dataTable = new google.visualization.DataTable();
+    addDataColumns(dataTable);
+  });
+}
