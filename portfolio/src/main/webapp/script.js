@@ -51,6 +51,14 @@ function getDate(date){
   let dateList = date.split("-");
   return new Date(dateList[0],dateList[1],dateList[2]);
 }
+function getDataRow(data,key){
+  let row = [];
+  row.push(key);
+  row.push(data[key][0]);
+  row.push(getDate(data[key][1]));
+  row.push(getDate(data[key][2]));
+  return row;
+}
 function drawChart(){
   fetch('/timeline').then(response => response.json()).then((timelineData) =>{
     const dataTable = new google.visualization.DataTable();
