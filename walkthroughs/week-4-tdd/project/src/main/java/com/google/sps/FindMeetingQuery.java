@@ -104,6 +104,31 @@ public final class FindMeetingQuery {
 
     }
 
+    //Case 2: blockedTimeRanges contains the Time Ranges of the events which is attended by atleast one of the attendee in the meeting request list of attendees.
+
+    else{
+
+      ArrayList<TimeRange> mergedTimeRanges = mergeIntervals(blockedTimeRanges);
+      
+      int currentStart = TimeRange.START_OF_DAY;
+
+      for (TimeRange interval: mergedTimeRanges){
+
+        // If the duration from the end of one interval to the start of next is greater than or equal to the required duration of time, add the interval to the available time range
+
+        if ((interval.start()-currentStart)>=request.getDuration()){
+          availableTimeRanges.add(TimeRange.fromStartEnd(currentStart, interval.start(), false));
+        }
+        currentStart = interval.end();
+      }
+
+      // Check if the last interval and the End of Day have enough duration for an available time range
+
+      if ((TimeRange.END_OF_DAY-currentStart)>=request.getDuration()){
+        availableTimeRanges.add(TimeRange.fromStartEnd(currentStart, TimeRange.END_OF_DAY, true));
+      }
+    }
+
     return availableTimeRanges;
   }
 }
