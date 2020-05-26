@@ -21,6 +21,45 @@ import java.util.Iterator;
 import java.util.Set;
 
 public final class FindMeetingQuery {
+  public ArrayList<TimeRange> mergeIntervals(ArrayList<TimeRange> Intervals){
+
+    // Sort the intevals of events by their sort time so that the overlapping intervals can be merged
+
+    Intervals.sort(TimeRange.ORDER_BY_START);
+
+    ArrayList<TimeRange> mergedTimeRanges = new ArrayList<TimeRange>();
+    mergedTimeRanges.add(Intervals.get(0));
+    int mergedTimeRangesCounter=0;
+
+    for (int i=1;i<Intervals.size();i++){
+
+      TimeRange blockedTimeRange = Intervals.get(i);
+      TimeRange lastTimeRange = mergedTimeRanges.get(mergedTimeRangesCounter);
+
+      // If a time range contains or is equal to the next time range, simply skip the next time range
+
+      if (lastTimeRange.equals(blockedTimeRange) || lastTimeRange.contains(blockedTimeRange)){
+        continue;
+      }
+
+      // If two time ranges overlap, remove the previous time range and replace it with the combined interval of the two overlapping time ranges
+
+      else if (lastTimeRange.overlaps(blockedTimeRange)){
+        TimeRange timeRange = TimeRange.fromStartEnd(lastTimeRange.start(), blockedTimeRange.end(),false);
+        mergedTimeRanges.remove(mergedTimeRangesCounter);
+        mergedTimeRanges.add(timeRange);
+      }
+
+      //If the two time ranges are disjoint, simply add the current time range to collection
+      
+      else{
+        mergedTimeRanges.add(blockedTimeRange);
+        mergedTimeRangesCounter++;
+      }
+
+    }
+    return mergedTimeRanges;
+  }
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
 
     // Remove all attendees from an event who are not in the meeting request
