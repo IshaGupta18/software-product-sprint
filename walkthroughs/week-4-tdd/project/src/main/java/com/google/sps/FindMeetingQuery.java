@@ -55,6 +55,16 @@ public final class FindMeetingQuery {
 
     ArrayList<TimeRange> availableTimeRanges = new ArrayList<TimeRange>();
 
+    //Case 1: All attendees attend no event ie the entire day is available for scheduling the meeting
+
+    if (blockedTimeRanges.isEmpty()){
+
+      if (request.getDuration()<=TimeRange.END_OF_DAY){
+        availableTimeRanges.add(TimeRange.WHOLE_DAY);
+      }
+
+    }
+
     return availableTimeRanges;
   }
 }
