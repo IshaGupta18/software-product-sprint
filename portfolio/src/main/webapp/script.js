@@ -33,11 +33,24 @@ function returnParagraphTag(content){
   pElement.innerText = content;
   return pElement;
 }
+function getCommentObject(comment){
+  try {
+    return JSON.parse(comment);
+  } catch (error) {
+    return null;
+  }
+}
+function appendParagraphToDOM(element,container){
+  document.getElementById(container).appendChild(returnParagraphTag(element));
+}
 function fetchComments(){
   fetch('/data').then(response => response.json()).then((comments)=>{
-    console.log(comments);
     comments.forEach((comment) => {
-      document.getElementById("comments-container").appendChild(returnParagraphTag(comment));
+      comment = getCommentObject(comment);
+      if (comment!=null) {
+        appendParagraphToDOM(comment["content"],"comments-container");
+        appendParagraphToDOM(comment["name"] + " | " + comment["mood"],"comments-container");
+      }
     });
   });
 }

@@ -29,6 +29,7 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -40,7 +41,7 @@ public class DataServlet extends HttpServlet {
   private static final long serialVersionUID = 5770012060147035495L;
 
   public PreparedQuery getStoredComments(){
-    Query query = new Query("Comment");
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
     return results;
@@ -50,10 +51,30 @@ public class DataServlet extends HttpServlet {
     ArrayList<String> commentsList = new ArrayList<String>();
     PreparedQuery commentsDatastore = getStoredComments();
     for (Entity entity : commentsDatastore.asIterable()){
-      String comment = (String) entity.getProperty("content");
+      String comment = (String) entity.getProperty("comment");
       commentsList.add(comment);
     }
     return commentsList;
+  }
+
+  public String convertToJSON(String content,String name,String mood){
+    String json = "{";
+    json += "\"content\": ";
+    json += "\"" + content + "\"";
+    json += ", ";
+    json += "\"name\": ";
+    json += "\"" + name + "\"";
+    json += ", ";
+    json += "\"mood\": ";
+    json += "\"" + mood + "\"";
+    json += "}";
+    return json;
+  }
+
+  public String handleHTMLInjection(String content){
+    content.replace("<", "&lt;");
+    content.replace(">", "&gt;");
+    return content;
   }
 
   @Override
@@ -65,10 +86,13 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String comment = request.getParameter("comment-content");
+    String content = handleHTMLInjection(request.getParameter("comment-content"));
+    String name = request.getParameter("commenter-name");
+    String mood = request.getParameter("comment-mood");
 
     Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("content", comment);
+    commentEntity.setProperty("comment", convertToJSON(content, name, mood));
+    commentEntity.setProperty("timestamp", System.currentTimeMillis());
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
