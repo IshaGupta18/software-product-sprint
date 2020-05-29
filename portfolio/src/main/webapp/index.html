@@ -111,20 +111,35 @@
         <div id="comment-form">
           <form action="/data" method="POST">
             <h3>Please give your valuable suggestions and feedback...</h3>
-            <textarea name="comment-content" placeholder="Any suggestion or comment..."></textarea>
+            <input name="commenter-name" class="form-control" placeholder="Enter your name">
             <br>
-            <input name="commenter-name" placeholder="Enter your name">
+            <textarea class="form-control" name="comment-content" placeholder="Any suggestion or comment..."></textarea>
             <br>
-            <select name="comment-mood">
-              <option value="None">None</option>
-              <option value="Like">Like</option>
-              <option value="Love">Love</option>
-              <option value="Haha">Haha</option>
-              <option value="Wow">Wow</option>
-              <option value="Sad">Sad</option>
-            </select>
-            <br>
-            <input type="submit"/>
+            <div class="mood-container">
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="like-button" name="comment-mood" class="custom-control-input" value="Like">
+                <label class="custom-control-label" for="like-button"><span class="badge badge-pill badge-primary">Like</span></label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="love-button" name="comment-mood" class="custom-control-input" value="Love">
+                <label class="custom-control-label" for="love-button"><span class="badge badge-pill badge-danger">Love</span></label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="haha-button" name="comment-mood" class="custom-control-input" value="Haha">
+                <label class="custom-control-label" for="haha-button"><span class="badge badge-pill badge-warning">Haha</span></label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="wow-button" name="comment-mood" class="custom-control-input" value="Wow">
+                <label class="custom-control-label" for="wow-button"><span class="badge badge-pill badge-success">Wow</span></label>
+              </div>
+              <div class="custom-control custom-radio custom-control-inline">
+                <input type="radio" id="sad-button" name="comment-mood" class="custom-control-input" value="Sad">
+                <label class="custom-control-label" for="sad-button"><span class="badge badge-pill badge-secondary">Sad</span></label>
+              </div>
+            </div>
+            <div class="single-button-container">
+              <input class="btn btn-outline-primary" type="submit"/>
+            </div>
           </form>
         </div>
         <h2> Some words about me from the world... </h2>
