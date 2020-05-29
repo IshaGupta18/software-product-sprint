@@ -20,8 +20,18 @@
 .project-card{
   height: 310px;
   width: 200px;
-  border: 2px solid black;
   margin: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 7px;
+  text-align: center;
+}
+.project-card:hover{
+  transform: scale(1.1);
+  box-shadow: 0 12px 24px 0 rgba(0,0,0,0.2);
+}
+.project-image{
+  border-radius: 7px;
 }
 #contact-information{
   bottom: 0;
