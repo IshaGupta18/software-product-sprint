@@ -51,7 +51,7 @@ public class DataServlet extends HttpServlet {
     ArrayList<String> commentsList = new ArrayList<String>();
     PreparedQuery commentsDatastore = getStoredComments();
     for (Entity entity : commentsDatastore.asIterable()){
-      String comment = (String) entity.getProperty("content");
+      String comment = (String) entity.getProperty("comment");
       commentsList.add(comment);
     }
     return commentsList;
@@ -86,10 +86,12 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String comment = handleHTMLInjection(request.getParameter("comment-content"));
+    String content = handleHTMLInjection(request.getParameter("comment-content"));
+    String name = request.getParameter("commenter-name");
+    String mood = request.getParameter("comment-mood");
 
     Entity commentEntity = new Entity("Comment");
-    commentEntity.setProperty("content", comment);
+    commentEntity.setProperty("comment", convertToJSON(content, name, mood));
     commentEntity.setProperty("timestamp", System.currentTimeMillis());
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
