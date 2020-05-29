@@ -55,3 +55,13 @@
   display: flex;
   justify-content: space-around;
 }
+.mood-container{
+  display: flex;
+  justify-content: space-around;
+}
+.single-button-container{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
