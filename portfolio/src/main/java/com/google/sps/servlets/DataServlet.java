@@ -29,6 +29,7 @@ import com.google.appengine.api.datastore.DatastoreServiceFactory;
 import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
+import com.google.appengine.api.datastore.Query.SortDirection;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
@@ -40,7 +41,7 @@ public class DataServlet extends HttpServlet {
   private static final long serialVersionUID = 5770012060147035495L;
 
   public PreparedQuery getStoredComments(){
-    Query query = new Query("Comment");
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
     return results;
@@ -75,6 +76,7 @@ public class DataServlet extends HttpServlet {
 
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("content", comment);
+    commentEntity.setProperty("timestamp", System.currentTimeMillis());
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(commentEntity);
