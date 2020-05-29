@@ -40,6 +40,9 @@ function getCommentObject(comment){
     return null;
   }
 }
+function appendParagraphToDOM(element,container){
+  document.getElementById(container).appendChild(returnParagraphTag(element));
+}
 function fetchComments(){
   fetch('/data').then(response => response.json()).then((comments)=>{
     comments.forEach((comment) => {
