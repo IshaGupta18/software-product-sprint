@@ -35,9 +35,12 @@ function returnParagraphTag(content){
 }
 function fetchComments(){
   fetch('/data').then(response => response.json()).then((comments)=>{
-    console.log(comments);
     comments.forEach((comment) => {
-      document.getElementById("comments-container").appendChild(returnParagraphTag(comment));
+      comment = getCommentObject(comment);
+      if (comment!=null) {
+        appendParagraphToDOM(comment["content"],"comments-container");
+        appendParagraphToDOM(comment["name"] + " | " + comment["mood"],"comments-container");
+      }
     });
   });
 }
