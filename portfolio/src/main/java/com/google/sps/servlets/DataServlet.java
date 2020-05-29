@@ -57,6 +57,20 @@ public class DataServlet extends HttpServlet {
     return commentsList;
   }
 
+  public String convertToJSON(String content,String name,String mood){
+    String json = "{";
+    json += "\"content\": ";
+    json += "\"" + content + "\"";
+    json += ", ";
+    json += "\"name\": ";
+    json += "\"" + name + "\"";
+    json += ", ";
+    json += "\"mood\": ";
+    json += "\"" + mood + "\"";
+    json += "}";
+    return json;
+  }
+
   public String handleHTMLInjection(String content){
     content.replace("<", "&lt;");
     content.replace(">", "&gt;");
