@@ -50,10 +50,8 @@
   filter: opacity(0.7);
   transform: scale(1.1);
 }
-.navbar-list{
-  list-style-type: none;
-  display: flex;
-  justify-content: space-around;
+.navbar{
+  background-color: #e3f2fd;
 }
 .mood-container{
   display: flex;
