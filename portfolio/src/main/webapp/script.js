@@ -33,6 +33,13 @@ function returnParagraphTag(content){
   pElement.innerText = content;
   return pElement;
 }
+function getCommentObject(comment){
+  try {
+    return JSON.parse(comment);
+  } catch (error) {
+    return null;
+  }
+}
 function fetchComments(){
   fetch('/data').then(response => response.json()).then((comments)=>{
     comments.forEach((comment) => {
