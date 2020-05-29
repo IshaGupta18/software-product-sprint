@@ -56,6 +56,12 @@ public class DataServlet extends HttpServlet {
     return commentsList;
   }
 
+  public String handleHTMLInjection(String content){
+    content.replace("<", "&lt;");
+    content.replace(">", "&gt;");
+    return content;
+  }
+
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     response.setContentType("application/json;");
@@ -65,7 +71,7 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    String comment = request.getParameter("comment-content");
+    String comment = handleHTMLInjection(request.getParameter("comment-content"));
 
     Entity commentEntity = new Entity("Comment");
     commentEntity.setProperty("content", comment);
