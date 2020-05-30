@@ -18,7 +18,7 @@
   justify-content: center;
 }
 .project-card{
-  height: 310px;
+  height: auto;
   width: 200px;
   margin: 20px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
