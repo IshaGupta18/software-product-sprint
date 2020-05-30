@@ -106,4 +106,29 @@ a{
 .badge-pill{
   margin-left: 10px;
 }
-
+#image-gallery-parent{
+  background-image: url('images/image-gallery/bgq.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.gallery-heading{
+  color: white;
+}
+#my-projects{
+  background-image: url('images/image-gallery/bg6.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.project-description{
+  color: white;
+}
+#comment-form{
+  background-image: url('images/image-gallery/bg8.jpg');
+}
+#blog1{
+  background-image: linear-gradient(to right, #36B7EA , #40C7D5, #7AC0BF);
+  color: white;
+  padding: 15px;
+}
