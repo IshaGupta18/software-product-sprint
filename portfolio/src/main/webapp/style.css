@@ -91,3 +91,17 @@ h1,h2,h5{
 a{
   font-family: 'McLaren';
 }
+.card-header{
+  height: 40px;
+}
+.card{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.card-body{
+  height: 50px;
+  margin-bottom: 10px;
+}
+.badge-pill{
+  margin-left: 10px;
+}
