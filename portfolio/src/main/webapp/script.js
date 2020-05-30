@@ -27,6 +27,17 @@ function createDivElement(className=null){
   }
   return divElement;
 }
+function createCommentCard(content,name){
+  let outerDiv = createDivElement("card");
+  let contentDiv = createDivElement("card-body");
+  contentDiv.appendChild(createTextHTMLElement("P",content,"card-text"));
+  outerDiv.appendChild(contentDiv);
+  let nameMoodDiv = createDivElement("card-header");
+  nameMoodDiv.appendChild(createTextHTMLElement(name));
+  outerDiv.appendChild(nameMoodDiv);
+  console.log(outerDiv);
+  document.getElementById("comments-container").appendChild(outerDiv);
+}
 function addRandomGreeting() {
   const greetings =
       ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
