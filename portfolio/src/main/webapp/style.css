@@ -1,11 +1,11 @@
+html {
+  scroll-behavior: smooth;
+}
 .content {
   margin-left: auto;
   margin-right: auto;
-  width: 650px;
+  width: 1000px;
   height: auto;
-}
-#greeting-container {
-  margin-top: 20px;
 }
 #my-projects{
   display: flex;
@@ -18,22 +18,35 @@
   justify-content: center;
 }
 .project-card{
-  height: 310px;
+  height: auto;
   width: 200px;
-  border: 2px solid black;
   margin: 20px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border-radius: 7px;
+  text-align: center;
 }
-#contact-information{
+.project-card:hover{
+  transform: scale(1.1);
+  box-shadow: 0 12px 24px 0 rgba(0,0,0,0.2);
+}
+.project-image{
+  border-radius: 7px;
+}
+.contact-information{
   bottom: 0;
   left: 0;
   width: 100%;
   text-align: center;
-  background-color: #d9d9d9;
-  height: 30px;
+  height: 50px;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 50px;
+  background-image: linear-gradient(to right, #40C7D5, #7AC0BF,white);
 }
 .contact-links{
   font-size: 30px;
-  margin-left: 10px;
+  color: #595959;
 }
 #image-gallery{
   display: flex;
@@ -44,14 +57,78 @@
   width: 190px;
   height: 190px;
   margin: 10px;
-  transition: 1s;
+  transition: 0.5s;
 }
 #image-gallery img:hover{
-  filter: brightness(1.5);
+  filter: opacity(0.7);
   transform: scale(1.1);
 }
-.navbar-list{
-  list-style-type: none;
+.navbar{
+  background-color: #e3f2fd;
+}
+.mood-container{
   display: flex;
   justify-content: space-around;
+}
+.single-button-container{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+#timeline-chart-container{
+  height: 520px;
+}
+h1,h2,h3,h4,h5,h6{
+  font-family: 'McLaren';
+}
+p{
+  font-family: 'News Cycle', sans-serif;
+  font-size: 20px;
+}
+h1,h2,h5{
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+a{
+  font-family: 'McLaren';
+}
+.card-header{
+  height: 40px;
+}
+.card{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.card-body{
+  height: 50px;
+  margin-bottom: 10px;
+}
+.badge-pill{
+  margin-left: 10px;
+}
+#image-gallery-parent{
+  background-image: url('images/image-gallery/bgq.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.gallery-heading{
+  color: white;
+}
+#my-projects{
+  background-image: url('images/image-gallery/bg6.jpg');
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.project-description{
+  color: white;
+}
+#comment-form{
+  background-image: url('images/image-gallery/bg8.jpg');
+}
+#blog1{
+  background-image: linear-gradient(to right, #b3e6ff, #ffffff);
+  padding: 15px;
 }

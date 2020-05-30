@@ -17,21 +17,47 @@
  */
 google.charts.load('current', {'packages':['timeline']});
 
-function addRandomGreeting() {
-  const greetings =
-      ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
-
-  // Pick a random greeting.
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
-
-  // Add it to the page.
-  const greetingContainer = document.getElementById('greeting-container');
-  greetingContainer.innerText = greeting;
+window.onload = function(e){
+  this.drawChart();
 }
-function returnParagraphTag(content){
-  let pElement = document.createElement("P");
-  pElement.innerText = content;
-  return pElement;
+function createDivElement(className=null){
+  let divElement = document.createElement("div");
+  if (className) divElement.className = className;
+  return divElement;
+}
+function getBadgeColour(mood){
+  if (mood==="Like") return "primary";
+
+  else if (mood==="Love") return "danger";
+
+  else if (mood==="Wow") return "success";
+
+  else if (mood==="Haha") return "warning";
+
+  else return "secondary";
+  
+}
+
+function createNameMoodSectionComment(name,mood){
+  let nameMoodDiv = createDivElement("card-header");
+  let nameParagraph = createTextHTMLElement("P",name);
+  if (mood) nameParagraph.appendChild(createTextHTMLElement("span",mood,"badge badge-pill badge-"+getBadgeColour(mood)));
+  nameMoodDiv.appendChild(nameParagraph);
+  return nameMoodDiv;
+}
+function createCommentCard(content,name=null,mood=null){
+  let outerDiv = createDivElement("card");
+  let contentDiv = createDivElement("card-body");
+  contentDiv.appendChild(createTextHTMLElement("P",content,"card-text"));
+  outerDiv.appendChild(contentDiv);
+  if (name) outerDiv.appendChild(createNameMoodSectionComment(name,mood));
+  document.getElementById("comments-container").appendChild(outerDiv);
+}
+function createTextHTMLElement(elementName,content,className=null){
+  let element = document.createElement(elementName);
+  if (className) element.className = className;
+  element.innerText = content;
+  return element;
 }
 function getCommentObject(comment){
   try {
@@ -41,16 +67,13 @@ function getCommentObject(comment){
   }
 }
 function appendParagraphToDOM(element,container){
-  document.getElementById(container).appendChild(returnParagraphTag(element));
+  document.getElementById(container).appendChild(createTextHTMLElement("P",element));
 }
 function fetchComments(){
   fetch('/data').then(response => response.json()).then((comments)=>{
     comments.forEach((comment) => {
       comment = getCommentObject(comment);
-      if (comment!=null) {
-        appendParagraphToDOM(comment["content"],"comments-container");
-        appendParagraphToDOM(comment["name"] + " | " + comment["mood"],"comments-container");
-      }
+      if (comment!=null && comment["content"]) createCommentCard(comment["content"],comment["name"],comment["mood"]);
     });
   });
 }
