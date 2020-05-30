@@ -38,10 +38,11 @@ html {
   left: 0;
   width: 100%;
   text-align: center;
-  height: 30px;
+  height: 50px;
   display: flex;
   justify-content: space-around;
   margin-bottom: 50px;
+  background-image: linear-gradient(to right, #40C7D5, #7AC0BF,white);
 }
 .contact-links{
   font-size: 30px;
@@ -128,7 +129,6 @@ a{
   background-image: url('images/image-gallery/bg8.jpg');
 }
 #blog1{
-  background-image: linear-gradient(to right, #36B7EA , #40C7D5, #7AC0BF);
-  color: white;
+  background-image: linear-gradient(to right, #b3e6ff, #ffffff);
   padding: 15px;
 }
