@@ -20,6 +20,13 @@ google.charts.load('current', {'packages':['timeline']});
 window.onload = function(e){
   this.drawChart();
 }
+function createDivElement(className=null){
+  let divElement = document.createElement("div");
+  if (className){
+    divElement.className = className;
+  }
+  return divElement;
+}
 function addRandomGreeting() {
   const greetings =
       ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
