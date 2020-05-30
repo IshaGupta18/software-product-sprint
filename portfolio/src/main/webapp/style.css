@@ -7,9 +7,6 @@ html {
   width: 1000px;
   height: auto;
 }
-#greeting-container {
-  margin-top: 20px;
-}
 #my-projects{
   display: flex;
   flex-wrap: wrap;
