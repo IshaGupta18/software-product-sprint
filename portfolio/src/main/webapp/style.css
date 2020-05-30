@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 .content {
   margin-left: auto;
   margin-right: auto;
@@ -33,7 +36,7 @@
 .project-image{
   border-radius: 7px;
 }
-#contact-information{
+.contact-information{
   bottom: 0;
   left: 0;
   width: 100%;
@@ -41,6 +44,7 @@
   height: 30px;
   display: flex;
   justify-content: space-around;
+  margin-bottom: 50px;
 }
 .contact-links{
   font-size: 30px;
@@ -105,3 +109,4 @@ a{
 .badge-pill{
   margin-left: 10px;
 }
+
