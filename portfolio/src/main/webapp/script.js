@@ -22,36 +22,26 @@ window.onload = function(e){
 }
 function createDivElement(className=null){
   let divElement = document.createElement("div");
-  if (className){
-    divElement.className = className;
-  }
+  if (className) divElement.className = className;
   return divElement;
 }
 function getBadgeColour(mood){
-  if (mood==="Like"){
-    return "primary";
-  }
-  else if (mood==="Love"){
-    return "danger";
-  }
-  else if (mood==="Wow"){
-    return "success";
-  }
-  else if (mood==="Haha"){
-    return "warning";
-  }
-  else{
-    return "secondary";
-  }
+  if (mood==="Like") return "primary";
+
+  else if (mood==="Love") return "danger";
+
+  else if (mood==="Wow") return "success";
+
+  else if (mood==="Haha") return "warning";
+
+  else return "secondary";
   
 }
 
 function createNameMoodSectionComment(name,mood){
   let nameMoodDiv = createDivElement("card-header");
   let nameParagraph = createTextHTMLElement("P",name);
-  if (mood){
-    nameParagraph.appendChild(createTextHTMLElement("span",mood,"badge badge-pill badge-"+getBadgeColour(mood)));
-  }
+  if (mood) nameParagraph.appendChild(createTextHTMLElement("span",mood,"badge badge-pill badge-"+getBadgeColour(mood)));
   nameMoodDiv.appendChild(nameParagraph);
   return nameMoodDiv;
 }
@@ -60,16 +50,12 @@ function createCommentCard(content,name=null,mood=null){
   let contentDiv = createDivElement("card-body");
   contentDiv.appendChild(createTextHTMLElement("P",content,"card-text"));
   outerDiv.appendChild(contentDiv);
-  if (name){
-    outerDiv.appendChild(createNameMoodSectionComment(name,mood));
-  }
+  if (name) outerDiv.appendChild(createNameMoodSectionComment(name,mood));
   document.getElementById("comments-container").appendChild(outerDiv);
 }
 function createTextHTMLElement(elementName,content,className=null){
   let element = document.createElement(elementName);
-  if (className){
-    element.className = className;
-  }
+  if (className) element.className = className;
   element.innerText = content;
   return element;
 }
@@ -87,9 +73,7 @@ function fetchComments(){
   fetch('/data').then(response => response.json()).then((comments)=>{
     comments.forEach((comment) => {
       comment = getCommentObject(comment);
-      if (comment!=null && comment["content"]) {
-        createCommentCard(comment["content"],comment["name"],comment["mood"]);
-      }
+      if (comment!=null && comment["content"]) createCommentCard(comment["content"],comment["name"],comment["mood"]);
     });
   });
 }
