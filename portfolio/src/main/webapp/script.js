@@ -20,7 +20,6 @@ google.charts.load('current', {'packages':['timeline']});
 window.onload = function(e){
   this.drawChart();
 }
-
 function addRandomGreeting() {
   const greetings =
       ['Hello world!', '¡Hola Mundo!', '你好，世界！', 'Bonjour le monde!'];
@@ -32,10 +31,13 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
-function returnParagraphTag(content){
-  let pElement = document.createElement("P");
-  pElement.innerText = content;
-  return pElement;
+function createTextHTMLElement(elementName,content,className=null){
+  let element = document.createElement(elementName);
+  if (className){
+    element.className = className;
+  }
+  element.innerText = content;
+  return element;
 }
 function getCommentObject(comment){
   try {
@@ -45,15 +47,14 @@ function getCommentObject(comment){
   }
 }
 function appendParagraphToDOM(element,container){
-  document.getElementById(container).appendChild(returnParagraphTag(element));
+  document.getElementById(container).appendChild(createTextHTMLElement("P",element));
 }
 function fetchComments(){
   fetch('/data').then(response => response.json()).then((comments)=>{
     comments.forEach((comment) => {
       comment = getCommentObject(comment);
       if (comment!=null) {
-        appendParagraphToDOM(comment["content"],"comments-container");
-        appendParagraphToDOM(comment["name"] + " | " + comment["mood"],"comments-container");
+        createCommentCard(comment["content"],comment["name"] + " | " + comment["mood"]);
       }
     });
   });
