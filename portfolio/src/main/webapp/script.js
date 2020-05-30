@@ -27,13 +27,35 @@ function createDivElement(className=null){
   }
   return divElement;
 }
-function createCommentCard(content,name){
+function getBadgeColour(mood){
+  if (mood==="Like"){
+    return "primary";
+  }
+  else if (mood==="Love"){
+    return "danger";
+  }
+  else if (mood==="Wow"){
+    return "success";
+  }
+  else if (mood==="Haha"){
+    return "warning";
+  }
+  else{
+    return "secondary";
+  }
+  
+}
+function createCommentCard(content,name,mood=null){
   let outerDiv = createDivElement("card");
   let contentDiv = createDivElement("card-body");
   contentDiv.appendChild(createTextHTMLElement("P",content,"card-text"));
   outerDiv.appendChild(contentDiv);
   let nameMoodDiv = createDivElement("card-header");
-  nameMoodDiv.appendChild(createTextHTMLElement(name));
+  let nameParagraph = createTextHTMLElement("P",name);
+  if (mood){
+    nameParagraph.appendChild(createTextHTMLElement("span",mood,"badge badge-pill badge-"+getBadgeColour(mood)));
+  }
+  nameMoodDiv.appendChild(nameParagraph);
   outerDiv.appendChild(nameMoodDiv);
   console.log(outerDiv);
   document.getElementById("comments-container").appendChild(outerDiv);
@@ -72,7 +94,7 @@ function fetchComments(){
     comments.forEach((comment) => {
       comment = getCommentObject(comment);
       if (comment!=null) {
-        createCommentCard(comment["content"],comment["name"] + " | " + comment["mood"]);
+        createCommentCard(comment["content"],comment["name"],comment["mood"]);
       }
     });
   });
