@@ -20,45 +20,49 @@ google.charts.load('current', {'packages':['timeline']});
 window.onload = function(e){
   this.drawChart();
 }
+
 function createDivElement(className=null){
   let divElement = document.createElement("div");
   if (className) divElement.className = className;
   return divElement;
 }
+
 function getBadgeColour(mood){
-  if (mood==="Like") return "primary";
+  if (mood === "Like") return "primary";
 
-  else if (mood==="Love") return "danger";
+  else if (mood === "Love") return "danger";
 
-  else if (mood==="Wow") return "success";
+  else if (mood === "Wow") return "success";
 
-  else if (mood==="Haha") return "warning";
+  else if (mood === "Haha") return "warning";
 
   else return "secondary";
-  
 }
 
-function createNameMoodSectionComment(name,mood){
+function createNameMoodSectionComment(name, mood){
   let nameMoodDiv = createDivElement("card-header");
-  let nameParagraph = createTextHTMLElement("P",name);
-  if (mood) nameParagraph.appendChild(createTextHTMLElement("span",mood,"badge badge-pill badge-"+getBadgeColour(mood)));
+  let nameParagraph = createTextHTMLElement("P", name);
+  if (mood) nameParagraph.appendChild(createTextHTMLElement("span", mood, "badge badge-pill badge-" + getBadgeColour(mood)));
   nameMoodDiv.appendChild(nameParagraph);
   return nameMoodDiv;
 }
-function createCommentCard(content,name=null,mood=null){
+
+function createCommentCard(content, name=null, mood=null){
   let outerDiv = createDivElement("card");
   let contentDiv = createDivElement("card-body");
-  contentDiv.appendChild(createTextHTMLElement("P",content,"card-text"));
+  contentDiv.appendChild(createTextHTMLElement("P", content, "card-text"));
   outerDiv.appendChild(contentDiv);
-  if (name) outerDiv.appendChild(createNameMoodSectionComment(name,mood));
+  if (name) outerDiv.appendChild(createNameMoodSectionComment(name, mood));
   document.getElementById("comments-container").appendChild(outerDiv);
 }
-function createTextHTMLElement(elementName,content,className=null){
+
+function createTextHTMLElement(elementName, content, className=null){
   let element = document.createElement(elementName);
   if (className) element.className = className;
   element.innerText = content;
   return element;
 }
+
 function getCommentObject(comment){
   try {
     return JSON.parse(comment);
@@ -66,27 +70,32 @@ function getCommentObject(comment){
     return null;
   }
 }
+
 function appendParagraphToDOM(element,container){
-  document.getElementById(container).appendChild(createTextHTMLElement("P",element));
+  document.getElementById(container).appendChild(createTextHTMLElement("P", element));
 }
+
 function fetchComments(){
   fetch('/data').then(response => response.json()).then((comments)=>{
     comments.forEach((comment) => {
       comment = getCommentObject(comment);
-      if (comment!=null && comment["content"]) createCommentCard(comment["content"],comment["name"],comment["mood"]);
+      if (comment!=null && comment["content"]) createCommentCard(comment["content"], comment["name"], comment["mood"]);
     });
   });
 }
+
 function addDataColumns(dataTable){
   dataTable.addColumn({ type: 'string', id: 'Organization' });
   dataTable.addColumn({ type: 'string', id: 'Position' });
   dataTable.addColumn({ type: 'date', id: 'Start' });
   dataTable.addColumn({ type: 'date', id: 'End' });
 }
+
 function getDate(date){
   let dateList = date.split("-");
-  return new Date(dateList[0],dateList[1],dateList[2]);
+  return new Date(dateList[0], dateList[1], dateList[2]);
 }
+
 function getDataRow(data,key){
   let row = [];
   row.push(key);
@@ -95,20 +104,26 @@ function getDataRow(data,key){
   row.push(getDate(data[key][2]));
   return row;
 }
+
+function getChartData(timelineData){
+  let data = [];
+  Object.keys(timelineData).forEach(function(key){
+    data.push(getDataRow(timelineData, key));
+  });
+  return data;
+}
+
 function drawChart(){
   fetch('/timeline').then(response => response.json()).then((timelineData) =>{
     const dataTable = new google.visualization.DataTable();
     addDataColumns(dataTable);
-    let data = [];
-    Object.keys(timelineData).forEach(function(key){
-      data.push(getDataRow(timelineData,key));
-    });
+    let data = getChartData(timelineData);
     dataTable.addRows(data);
     var options = {
       timeline: { colorByRowLabel: true }
     };
     var container = document.getElementById("timeline-chart-container");
     var chart = new google.visualization.Timeline(container);
-    chart.draw(dataTable,options);
+    chart.draw(dataTable, options);
   });
 }
